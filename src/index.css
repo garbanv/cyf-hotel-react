@@ -24,3 +24,11 @@ body {
 .search-row input {
   margin-right: 10px;
 }
+
+header img {
+  width: 42px;
+  height: auto;
+  margin-right: 10px;
+  position: relative;
+  top: -10px;
+}
