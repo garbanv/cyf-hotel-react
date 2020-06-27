@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
+import CustomerProfile from "./CustomerProfile";
 
 export default function SearchResults({ results }) {
+  const [profileId, setProfileId] = useState(null);
+
   function getDays(dateA, dateB) {
     return dateB.diff(dateA, "days");
   }
+
+  const handleProfile = e => {
+    e.preventDefault();
+    setProfileId(e.target.value);
+  };
   return (
     <div className="container pt-1">
       <h3 className="text-center mb-5">Search Results</h3>
@@ -20,6 +28,7 @@ export default function SearchResults({ results }) {
             <th scope="col">Check in</th>
             <th scope="col">Check out</th>
             <th scope="col">Nights</th>
+            <th scope="col">Profile</th>
           </tr>
         </thead>
         <tbody>
@@ -40,11 +49,22 @@ export default function SearchResults({ results }) {
                     moment(result.checkOutDate)
                   )}
                 </td>
+                <td>
+                  <button
+                    className="btn btn-dark"
+                    onClick={handleProfile}
+                    value={result.id}
+                  >
+                    Show Profile
+                  </button>
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+
+      {profileId ? <CustomerProfile id={profileId} /> : " "}
     </div>
   );
 }

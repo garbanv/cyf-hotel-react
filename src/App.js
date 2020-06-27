@@ -1,10 +1,11 @@
 import React from "react";
 
-import Bookings from "./Bookings";
+import Bookings from "./components/Bookings";
 import Header from "./components/Header";
 import TouristInfoCards from "./components/TouristInfoCards";
 import Footer from "./components/Footer";
 import SearchResults from "./components/SearchResults";
+import Restaurant from "./components/Restaurant";
 import "./App.css";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
       <Header />
       <TouristInfoCards />
       <Bookings />
+      <Restaurant />
       <Footer info={info} />
     </div>
   );
