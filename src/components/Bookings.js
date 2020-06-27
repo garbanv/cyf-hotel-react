@@ -5,6 +5,7 @@ import SearchResults from "./SearchResults";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const search = searchVal => {
     // console.info("TO DO!", searchVal);
@@ -30,7 +31,10 @@ const Bookings = () => {
   const getBookings = () => {
     fetch("https://cyf-react.glitch.me")
       .then(response => response.json())
-      .then(data => setBookings(data))
+      .then(data => {
+        setBookings(data);
+        bookings ? setLoading(false) : setLoading(true);
+      })
       .catch(err => console.log(err));
   };
 
@@ -38,7 +42,13 @@ const Bookings = () => {
     <div className="App-content">
       <div className="container">
         <Search search={search} />
-        <SearchResults results={bookings} />
+        {loading ? (
+          <div className="text-center my-5">
+            <img src="https://lh3.googleusercontent.com/proxy/dWsQWYbaiwLjj3XeGJ2NhE21ehGLHEZ1mbvRIwRlop2T2X7MWUwKMTogOKh-f7ZVB73Jywxv5cJRrLl_7jEkoP_ALeNK2-0SjREBOrsJUsJcY_UmuQ" />
+          </div>
+        ) : (
+          <SearchResults results={bookings} />
+        )}
       </div>
     </div>
   );
